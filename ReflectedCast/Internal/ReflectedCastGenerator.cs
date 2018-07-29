@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
+using ReflectedCast.Exceptions;
 using ReflectedCast.Internal;
 
 namespace ReflectedCast
@@ -19,7 +20,7 @@ namespace ReflectedCast
 
         public static TypeMap CreateWrapperType(Type sourceType, Type targetType)
         {
-            string newTypeName = "Wrapper_" + sourceType.Name + "_" + targetType.Name;
+            string newTypeName = "Wrapper_" + sourceType.FullName + "_" + targetType.FullName;
 
             TypeMap result = new TypeMap(sourceType, targetType);
 
@@ -72,8 +73,9 @@ namespace ReflectedCast
                     result.MissingMethods.Add(method);
 
                     // Generate method that throws exception
-                    methodIl.Emit(OpCodes.Ldstr, $"The wrapped type {sourceType.FullName}, did not have a method named {method}");
-                    methodIl.Emit(OpCodes.Newobj, typeof(NotImplementedException).GetConstructor(new[] { typeof(string) }));
+                    methodIl.Emit(OpCodes.Ldtoken, sourceType);
+                    methodIl.Emit(OpCodes.Ldstr, method.ToString());
+                    methodIl.Emit(OpCodes.Newobj, typeof(ReflectedCastNotImplementedInSourceException).GetConstructor(new[] { typeof(Type), typeof(string) }));
                     methodIl.Emit(OpCodes.Throw);
                 }
                 else

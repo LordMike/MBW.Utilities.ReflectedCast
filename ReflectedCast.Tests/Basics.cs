@@ -132,84 +132,84 @@ namespace ReflectedCast.Tests
             Assert.Equal($"Hello world{1}c{2}e{3}g{4}i{5}", orig.ReturnCode);
             Assert.Equal($"Hello world{1}c{2}e{3}g{4}i{5}", ret);
         }
-    }
 
-    public interface ITestInterface
-    {
-        event Action Event;
-
-        string Property { get; set; }
-
-        string PropertyGetOnly { get; }
-
-        string PropertySetOnly { set; }
-
-        void Method();
-
-        void MethodOneArg(string a);
-
-        void MethodTwoArg(string a, int b);
-
-        void MethodTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j);
-
-        string MethodReturnOneArg(string a);
-
-        string MethodReturnTwoArg(string a, int b);
-
-        string MethodReturnTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j);
-    }
-
-    public class TestClass : ITestInterface
-    {
-        public object ReturnCode { get; private set; }
-
-        public event Action Event;
-
-        public string Property { get; set; }
-
-        public string PropertyGetOnly { get; set; }
-
-        public string PropertySetOnly { get; set; }
-
-        public void Method()
+        public interface ITestInterface
         {
-            ReturnCode = 1;
-            Event?.Invoke();
+            event Action Event;
+
+            string Property { get; set; }
+
+            string PropertyGetOnly { get; }
+
+            string PropertySetOnly { set; }
+
+            void Method();
+
+            void MethodOneArg(string a);
+
+            void MethodTwoArg(string a, int b);
+
+            void MethodTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j);
+
+            string MethodReturnOneArg(string a);
+
+            string MethodReturnTwoArg(string a, int b);
+
+            string MethodReturnTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j);
         }
 
-        public void MethodOneArg(string a)
+        public class TestClass
         {
-            ReturnCode = a;
-        }
+            public object ReturnCode { get; private set; }
 
-        public void MethodTwoArg(string a, int b)
-        {
-            ReturnCode = a + b;
-        }
+            public event Action Event;
 
-        public void MethodTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j)
-        {
-            ReturnCode = a + b + c + d + e + f + g + h + i + j;
-        }
+            public string Property { get; set; }
 
-        public string MethodReturnOneArg(string a)
-        {
-            ReturnCode = a;
-            return a;
-        }
+            public string PropertyGetOnly { get; set; }
 
-        public string MethodReturnTwoArg(string a, int b)
-        {
-            var val = a + b;
-            ReturnCode = val;
-            return val;
-        }
+            public string PropertySetOnly { get; set; }
 
-        public string MethodReturnTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j)
-        {
-            var val = a + b + c + d + e + f + g + h + i + j;
-            ReturnCode = val;
-            return val;
+            public void Method()
+            {
+                ReturnCode = 1;
+                Event?.Invoke();
+            }
+
+            public void MethodOneArg(string a)
+            {
+                ReturnCode = a;
+            }
+
+            public void MethodTwoArg(string a, int b)
+            {
+                ReturnCode = a + b;
+            }
+
+            public void MethodTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j)
+            {
+                ReturnCode = a + b + c + d + e + f + g + h + i + j;
+            }
+
+            public string MethodReturnOneArg(string a)
+            {
+                ReturnCode = a;
+                return a;
+            }
+
+            public string MethodReturnTwoArg(string a, int b)
+            {
+                string val = a + b;
+                ReturnCode = val;
+                return val;
+            }
+
+            public string MethodReturnTenArg(string a, int b, string c, int d, string e, int f, string g, int h, string i, int j)
+            {
+                string val = a + b + c + d + e + f + g + h + i + j;
+                ReturnCode = val;
+                return val;
+            }
         }
     }
 }

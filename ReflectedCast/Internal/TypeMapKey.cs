@@ -2,7 +2,7 @@
 
 namespace ReflectedCast.Internal
 {
-    internal struct TypeMapKey
+    internal struct TypeMapKey : IEquatable<TypeMapKey>
     {
         private readonly Type _a;
         private readonly Type _b;
