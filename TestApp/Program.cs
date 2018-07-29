@@ -8,72 +8,41 @@ namespace TestApp
         static void Main(string[] args)
         {
             TestClass orig = new TestClass();
-            ITest asInterface = ReflectedCaster.CastToInterface<ITest>(orig);
+            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.CastToInterface<ITestInterfaceFirst>(orig);
+            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.CastToInterface<ITestInterfaceSecond>(orig);
 
-            asInterface.MyProperty = "SomeValue";
-            asInterface.Event += () => Console.WriteLine("Event called");
-            asInterface.HelloWorld("Test", 4);
-            Console.WriteLine(asInterface.Add(4, 5));
+            asInterfaceFirst.Method();
+            asInterfaceSecond.Method();
         }
     }
 
-    public interface ITest
+    public interface ITestInterfaceFirst
     {
-        event Action Event;
-
-        string MyProperty { get; set; }
-
-        void HelloWorld(string a, int b);
-
-        int Add(int a, int b);
+        void Method();
     }
 
-    public class TestClass
+    public interface ITestInterfaceSecond
     {
-        public event Action Event;
-
-        public string MyProperty { get; set; }
-
-        public void HelloWorld(string a, int b)
-        {
-            Event?.Invoke();
-            Console.WriteLine("Ohai; Prop: " + MyProperty + ";; " + a + ", " + b);
-        }
-
-        public int Add(int a, int b)
-        {
-            return a + b;
-        }
+        void Method();
     }
 
-
-
-
-    class TestWrapper : ITest
+    public class TestClass : ITestInterfaceFirst, ITestInterfaceSecond
     {
-        private readonly TestClass _clss;
+        public object ReturnCode { get; set; }
 
-        public TestWrapper(TestClass clss)
+        public void Method()
         {
-            _clss = clss;
+            ReturnCode = 3;
         }
 
-        public event Action Event;
-
-        public string MyProperty
+        void ITestInterfaceFirst.Method()
         {
-            get => throw new NotImplementedException("The wrapped type");
-            set => throw new NotImplementedException();
+            ReturnCode = 1;
         }
 
-        public void HelloWorld(string a, int b)
+        void ITestInterfaceSecond.Method()
         {
-            _clss.HelloWorld(a, b);
-        }
-
-        public int Add(int a, int b)
-        {
-            return _clss.Add(a, b);
+            ReturnCode = 2;
         }
     }
 }
