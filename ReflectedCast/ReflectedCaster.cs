@@ -7,18 +7,23 @@ using ReflectedCast.Internal;
 
 namespace ReflectedCast
 {
-    public static class ReflectedCaster
+    public class ReflectedCaster
     {
-        private static readonly Dictionary<TypeMapKey, TypeMap> Maps;
+        public static ReflectedCaster Default { get; } = new ReflectedCaster();
 
-        static ReflectedCaster()
+        private readonly Dictionary<TypeMapKey, TypeMap> _maps;
+        private readonly ReflectedCasterOptions _options;
+
+        public ReflectedCaster(ReflectedCasterOptions options = null)
         {
-            Maps = new Dictionary<TypeMapKey, TypeMap>();
+            _options = options == null ? new ReflectedCasterOptions() : options.Clone();
+
+            _maps = new Dictionary<TypeMapKey, TypeMap>();
         }
 
-        private static void CheckOptions(TypeMap wrappedResult, CastOptions options)
+        private static void CheckOptions(TypeMap wrappedResult, CastUsageOptions usageOptions)
         {
-            if (!options.HasFlag(CastOptions.AllowMissingFunctions) && wrappedResult.MissingMethods.Any())
+            if (!usageOptions.HasFlag(CastUsageOptions.AllowMissingFunctions) && wrappedResult.MissingMethods.Any())
             {
                 // Must not have missing methods
                 throw new ReflectedCastMissingMethodsException(wrappedResult);
@@ -26,28 +31,28 @@ namespace ReflectedCast
         }
 
         [PublicAPI]
-        public static T CastToInterface<T>(object instance, CastOptions options = CastOptions.None)
+        public T CastToInterface<T>(object instance, CastUsageOptions usageOptions = CastUsageOptions.None)
         {
             Type targetType = typeof(T);
             if (!targetType.IsInterface)
                 throw new ArgumentException();
 
-            return (T)CastToInterface(instance, targetType, options);
+            return (T)CastToInterface(instance, targetType, usageOptions);
         }
 
         [PublicAPI]
-        public static object CastToInterface(object instance, Type targetType, CastOptions options = CastOptions.None)
+        public object CastToInterface(object instance, Type targetType, CastUsageOptions usageOptions = CastUsageOptions.None)
         {
             if (!targetType.IsInterface)
                 throw new ArgumentException();
 
             Type sourceType = instance.GetType();
 
-            if (!Maps.TryGetValue(new TypeMapKey(sourceType, targetType), out TypeMap wrappedResult))
-                Maps[new TypeMapKey(sourceType, targetType)] = wrappedResult = ReflectedCastGenerator.CreateWrapperType(sourceType, targetType);
+            if (!_maps.TryGetValue(new TypeMapKey(sourceType, targetType), out TypeMap wrappedResult))
+                _maps[new TypeMapKey(sourceType, targetType)] = wrappedResult = ReflectedCastGenerator.CreateWrapperType(_options, sourceType, targetType);
 
             // Check options
-            CheckOptions(wrappedResult, options);
+            CheckOptions(wrappedResult, usageOptions);
 
             // Return result
             return Activator.CreateInstance(wrappedResult.WrappingType, instance);

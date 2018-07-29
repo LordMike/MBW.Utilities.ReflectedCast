@@ -3,7 +3,7 @@
 namespace ReflectedCast
 {
     [Flags]
-    public enum CastOptions
+    public enum CastUsageOptions
     {
         None = 0,
         AllowMissingFunctions = 1

@@ -8,7 +8,7 @@ namespace ReflectedCast.Tests
         public void InheritedMethod()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.Method();
             Assert.Equal(1, orig.ReturnCode);

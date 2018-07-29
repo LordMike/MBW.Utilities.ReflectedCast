@@ -9,8 +9,8 @@ namespace ReflectedCast.Tests
         {
             // Tests a straightforward setup (same interfaces)
             TestClass orig = new TestClass();
-            FirstScope.ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.CastToInterface<FirstScope.ITestInterfaceFirst>(orig);
-            FirstScope.ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.CastToInterface<FirstScope.ITestInterfaceSecond>(orig);
+            FirstScope.ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.Default.CastToInterface<FirstScope.ITestInterfaceFirst>(orig);
+            FirstScope.ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.Default.CastToInterface<FirstScope.ITestInterfaceSecond>(orig);
 
             asInterfaceFirst.Method();
             Assert.Equal(1, orig.ReturnCode);
@@ -24,8 +24,8 @@ namespace ReflectedCast.Tests
         {
             // Tests the case where the interfaces are actually different, but the names are the same
             TestClass orig = new TestClass();
-            OtherScope.ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.CastToInterface<OtherScope.ITestInterfaceFirst>(orig);
-            OtherScope.ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.CastToInterface< OtherScope.ITestInterfaceSecond> (orig);
+            OtherScope.ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.Default.CastToInterface<OtherScope.ITestInterfaceFirst>(orig);
+            OtherScope.ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.Default.CastToInterface< OtherScope.ITestInterfaceSecond> (orig);
 
             asInterfaceFirst.Method();
             Assert.Equal(1, orig.ReturnCode);

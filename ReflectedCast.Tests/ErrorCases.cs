@@ -10,14 +10,14 @@ namespace ReflectedCast.Tests
         {
             TestClass1 orig = new TestClass1();
 
-            Assert.Throws<ReflectedCastMissingMethodsException>(() => ReflectedCaster.CastToInterface<ITestInterface1>(orig));
+            Assert.Throws<ReflectedCastMissingMethodsException>(() => ReflectedCaster.Default.CastToInterface<ITestInterface1>(orig));
         }
 
         [Fact]
         public void MissingFunctionAllow()
         {
             TestClass1 orig = new TestClass1();
-            ITestInterface1 asInterface = ReflectedCaster.CastToInterface<ITestInterface1>(orig, CastOptions.AllowMissingFunctions);
+            ITestInterface1 asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface1>(orig, CastUsageOptions.AllowMissingFunctions);
 
             Assert.Throws<ReflectedCastNotImplementedInSourceException>(() => asInterface.Method());
         }
@@ -27,14 +27,14 @@ namespace ReflectedCast.Tests
         {
             TestClass2 orig = new TestClass2();
 
-            Assert.Throws<ReflectedCastMissingMethodsException>(() => ReflectedCaster.CastToInterface<ITestInterface2>(orig));
+            Assert.Throws<ReflectedCastMissingMethodsException>(() => ReflectedCaster.Default.CastToInterface<ITestInterface2>(orig));
         }
 
         [Fact]
         public void WrongReturnAllow()
         {
             TestClass2 orig = new TestClass2();
-            ITestInterface2 asInterface = ReflectedCaster.CastToInterface<ITestInterface2>(orig, CastOptions.AllowMissingFunctions);
+            ITestInterface2 asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface2>(orig, CastUsageOptions.AllowMissingFunctions);
 
             Assert.Throws<ReflectedCastNotImplementedInSourceException>(() => asInterface.MethodReturn());
         }

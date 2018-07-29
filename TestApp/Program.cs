@@ -8,8 +8,8 @@ namespace TestApp
         static void Main(string[] args)
         {
             TestClass orig = new TestClass();
-            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.CastToInterface<ITestInterfaceFirst>(orig);
-            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.CastToInterface<ITestInterfaceSecond>(orig);
+            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.Default.CastToInterface<ITestInterfaceFirst>(orig);
+            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.Default.CastToInterface<ITestInterfaceSecond>(orig);
 
             asInterfaceFirst.Method();
             asInterfaceSecond.Method();

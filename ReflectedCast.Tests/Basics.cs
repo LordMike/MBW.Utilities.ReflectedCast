@@ -9,7 +9,7 @@ namespace ReflectedCast.Tests
         public void Event()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             int counter = 0;
             asInterface.Event += () => counter++;
@@ -23,7 +23,7 @@ namespace ReflectedCast.Tests
         public void Property()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.Property = "Hello world";
 
@@ -35,7 +35,7 @@ namespace ReflectedCast.Tests
         public void PropertyGetOnly()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             orig.PropertyGetOnly = "Hello world";
 
@@ -46,7 +46,7 @@ namespace ReflectedCast.Tests
         public void PropertySetOnly()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.PropertySetOnly = "Hello world";
 
@@ -57,7 +57,7 @@ namespace ReflectedCast.Tests
         public void Method()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.Method();
 
@@ -68,7 +68,7 @@ namespace ReflectedCast.Tests
         public void MethodOneArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.MethodOneArg("Hello world");
 
@@ -79,7 +79,7 @@ namespace ReflectedCast.Tests
         public void MethodTwoArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.MethodTwoArg("Hello world", 18);
 
@@ -90,7 +90,7 @@ namespace ReflectedCast.Tests
         public void MethodTenArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             asInterface.MethodTenArg("Hello world", 1, "c", 2, "e", 3, "g", 4, "i", 5);
 
@@ -101,7 +101,7 @@ namespace ReflectedCast.Tests
         public void MethodReturnOneArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             string ret = asInterface.MethodReturnOneArg("Hello world");
 
@@ -113,7 +113,7 @@ namespace ReflectedCast.Tests
         public void MethodReturnTwoArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             string ret = asInterface.MethodReturnTwoArg("Hello world", 18);
 
@@ -125,7 +125,7 @@ namespace ReflectedCast.Tests
         public void MethodReturnTenArg()
         {
             TestClass orig = new TestClass();
-            ITestInterface asInterface = ReflectedCaster.CastToInterface<ITestInterface>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
             string ret = asInterface.MethodReturnTenArg("Hello world", 1, "c", 2, "e", 3, "g", 4, "i", 5);
 

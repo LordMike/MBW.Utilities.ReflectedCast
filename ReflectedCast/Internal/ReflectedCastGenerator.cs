@@ -18,7 +18,7 @@ namespace ReflectedCast
             ModuleBuilder = assemblyBuilder.DefineDynamicModule("ProxyModule");
         }
 
-        public static TypeMap CreateWrapperType(Type sourceType, Type targetType)
+        public static TypeMap CreateWrapperType(ReflectedCasterOptions options, Type sourceType, Type targetType)
         {
             string newTypeName = "Wrapper_" + sourceType.FullName + "_" + targetType.FullName;
 
@@ -56,7 +56,7 @@ namespace ReflectedCast
             foreach (MethodInfo method in targetType.GetMethods())
             {
                 // Find matching source method
-                MethodInfo sourceMethod = FindSourceMethod(sourceType, targetType, method.Name, method.GetParameters().Select(s => s.ParameterType).ToArray(), method.ReturnType);
+                MethodInfo sourceMethod = FindSourceMethod(options, sourceType, targetType, method.Name, method.GetParameters().Select(s => s.ParameterType).ToArray(), method.ReturnType);
 
                 // Generate new method
                 MethodAttributes attributes = method.Attributes;
@@ -110,30 +110,36 @@ namespace ReflectedCast
             return result;
         }
 
-        private static MethodInfo FindSourceMethod(Type sourceType, Type targetType, string name, Type[] parameters, Type returnType)
+        private static MethodInfo FindSourceMethod(ReflectedCasterOptions options, Type sourceType, Type targetType, string name, Type[] parameters, Type returnType)
         {
             MethodInfo method;
 
-            // Try explicit implementation on Interface by FullName
-            foreach (var @interface in sourceType.GetInterfaces())
+            if (options.SupportExplicitImplementations)
             {
-                if (@interface.FullName != targetType.FullName)
-                    continue;
+                // Try explicit implementation on Interface by FullName
+                foreach (Type @interface in sourceType.GetInterfaces())
+                {
+                    if (@interface.FullName != targetType.FullName)
+                        continue;
 
-                method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                if (method != null && method.ReturnType == returnType)
-                    return method;
+                    method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+                    if (method != null && method.ReturnType == returnType)
+                        return method;
+                }
             }
 
-            // Try explicit implementation on Interface by Name
-            foreach (var @interface in sourceType.GetInterfaces())
+            if (options.SupportExplicitImplementationsByInterfaceName)
             {
-                if (@interface.Name != targetType.Name)
-                    continue;
+                // Try explicit implementation on Interface by Name
+                foreach (Type @interface in sourceType.GetInterfaces())
+                {
+                    if (@interface.Name != targetType.Name)
+                        continue;
 
-                method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                if (method != null && method.ReturnType == returnType)
-                    return method;
+                    method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+                    if (method != null && method.ReturnType == returnType)
+                        return method;
+                }
             }
 
             // Try implicit implementation

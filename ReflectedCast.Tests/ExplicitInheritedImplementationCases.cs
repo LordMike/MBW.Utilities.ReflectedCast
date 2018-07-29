@@ -8,8 +8,8 @@ namespace ReflectedCast.Tests
         public void ExplicitInheritedImplementation()
         {
             TestClass orig = new TestClass();
-            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.CastToInterface<ITestInterfaceFirst>(orig);
-            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.CastToInterface<ITestInterfaceSecond>(orig);
+            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.Default.CastToInterface<ITestInterfaceFirst>(orig);
+            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.Default.CastToInterface<ITestInterfaceSecond>(orig);
 
             asInterfaceFirst.Method();
             Assert.Equal(1, orig.ReturnCode);
