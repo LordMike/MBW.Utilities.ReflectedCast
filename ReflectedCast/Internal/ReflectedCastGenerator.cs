@@ -56,7 +56,7 @@ namespace ReflectedCast
             foreach (MethodInfo method in targetType.GetMethods())
             {
                 // Find matching source method
-                MethodInfo sourceMethod = FindSourceMethod(sourceType, targetType, method.Name, method.GetParameters().Select(s => s.ParameterType).ToArray());
+                MethodInfo sourceMethod = FindSourceMethod(sourceType, targetType, method.Name, method.GetParameters().Select(s => s.ParameterType).ToArray(), method.ReturnType);
 
                 // Generate new method
                 MethodAttributes attributes = method.Attributes;
@@ -110,7 +110,7 @@ namespace ReflectedCast
             return result;
         }
 
-        private static MethodInfo FindSourceMethod(Type sourceType, Type targetType, string name, Type[] parameters)
+        private static MethodInfo FindSourceMethod(Type sourceType, Type targetType, string name, Type[] parameters, Type returnType)
         {
             MethodInfo method;
 
@@ -121,7 +121,7 @@ namespace ReflectedCast
                     continue;
 
                 method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                if (method != null)
+                if (method != null && method.ReturnType == returnType)
                     return method;
             }
 
@@ -132,13 +132,13 @@ namespace ReflectedCast
                     continue;
 
                 method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                if (method != null)
+                if (method != null && method.ReturnType == returnType)
                     return method;
             }
 
             // Try implicit implementation
             method = sourceType.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-            if (method != null)
+            if (method != null && method.ReturnType == returnType)
                 return method;
 
             return null;
