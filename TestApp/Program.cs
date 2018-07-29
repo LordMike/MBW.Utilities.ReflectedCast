@@ -8,41 +8,26 @@ namespace TestApp
         static void Main(string[] args)
         {
             TestClass orig = new TestClass();
-            ITestInterfaceFirst asInterfaceFirst = ReflectedCaster.Default.CastToInterface<ITestInterfaceFirst>(orig);
-            ITestInterfaceSecond asInterfaceSecond = ReflectedCaster.Default.CastToInterface<ITestInterfaceSecond>(orig);
+            ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
-            asInterfaceFirst.Method();
-            asInterfaceSecond.Method();
+            asInterface.Method();
+
+            Console.WriteLine(orig.ReturnCode);
         }
     }
 
-    public interface ITestInterfaceFirst
+    public interface ITestInterface
     {
         void Method();
     }
 
-    public interface ITestInterfaceSecond
-    {
-        void Method();
-    }
-
-    public class TestClass : ITestInterfaceFirst, ITestInterfaceSecond
+    public class TestClass
     {
         public object ReturnCode { get; set; }
 
         public void Method()
         {
-            ReturnCode = 3;
-        }
-
-        void ITestInterfaceFirst.Method()
-        {
-            ReturnCode = 1;
-        }
-
-        void ITestInterfaceSecond.Method()
-        {
-            ReturnCode = 2;
+            ReturnCode = "Hello world";
         }
     }
 }
