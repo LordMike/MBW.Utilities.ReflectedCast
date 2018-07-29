@@ -37,12 +37,29 @@ namespace ReflectedCast
             return this;
         }
 
+        /// <summary>
+        /// Allows finding mapping to methods that return more specific types, such as:
+        /// Instance:
+        ///   MyClass MyMethod();
+        ///
+        /// Interface:
+        ///   MyBaseClass MyMethod();
+        /// </summary>
+        public bool SupportSpecificReturnTypes { get; set; }
+
+        public ReflectedCasterOptions SetSupportSpecificReturnTypes(bool supported = true)
+        {
+            SupportSpecificReturnTypes = supported;
+            return this;
+        }
+
         internal ReflectedCasterOptions Clone()
         {
             return new ReflectedCasterOptions
             {
                 SupportExplicitImplementations = SupportExplicitImplementations,
-                SupportExplicitImplementationsByInterfaceName = SupportExplicitImplementationsByInterfaceName
+                SupportExplicitImplementationsByInterfaceName = SupportExplicitImplementationsByInterfaceName,
+                SupportSpecificReturnTypes = SupportSpecificReturnTypes
             };
         }
     }

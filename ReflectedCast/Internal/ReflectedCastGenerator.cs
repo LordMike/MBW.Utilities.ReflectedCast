@@ -105,6 +105,22 @@ namespace ReflectedCast
         {
             MethodInfo method;
 
+            bool IsValidMethod(MethodInfo candidate)
+            {
+                if (candidate == null)
+                    return false;
+
+                if (options.SupportSpecificReturnTypes)
+                {
+                    if (!returnType.IsAssignableFrom(method.ReturnType))
+                        return false;
+                }
+                else if (method.ReturnType != returnType)
+                    return false;
+
+                return true;
+            }
+
             if (options.SupportExplicitImplementations)
             {
                 // Try explicit implementation on Interface by FullName
@@ -114,7 +130,7 @@ namespace ReflectedCast
                         continue;
 
                     method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                    if (method != null && method.ReturnType == returnType)
+                    if (IsValidMethod(method))
                         return method;
                 }
             }
@@ -128,14 +144,14 @@ namespace ReflectedCast
                         continue;
 
                     method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-                    if (method != null && method.ReturnType == returnType)
+                    if (IsValidMethod(method))
                         return method;
                 }
             }
 
             // Try implicit implementation
             method = sourceType.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
-            if (method != null && method.ReturnType == returnType)
+            if (IsValidMethod(method))
                 return method;
 
             return null;
