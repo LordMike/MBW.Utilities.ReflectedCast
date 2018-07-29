@@ -56,8 +56,7 @@ namespace ReflectedCast
             foreach (MethodInfo method in targetType.GetMethods())
             {
                 // Find matching source method
-                MethodInfo sourceMethod = sourceType
-                    .GetMethod(method.Name, BindingFlags.Public | BindingFlags.Instance, null, method.GetParameters().Select(x => x.ParameterType).ToArray(), null);
+                MethodInfo sourceMethod = FindSourceMethod(sourceType, targetType, method.Name, method.GetParameters().Select(s => s.ParameterType).ToArray());
 
                 // Generate new method
                 MethodAttributes attributes = method.Attributes;
@@ -109,6 +108,40 @@ namespace ReflectedCast
             result.WrappingType = typeBuilder.CreateType();
 
             return result;
+        }
+
+        private static MethodInfo FindSourceMethod(Type sourceType, Type targetType, string name, Type[] parameters)
+        {
+            MethodInfo method;
+
+            // Try explicit implementation on Interface by FullName
+            foreach (var @interface in sourceType.GetInterfaces())
+            {
+                if (@interface.FullName != targetType.FullName)
+                    continue;
+
+                method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+                if (method != null)
+                    return method;
+            }
+
+            // Try explicit implementation on Interface by Name
+            foreach (var @interface in sourceType.GetInterfaces())
+            {
+                if (@interface.Name != targetType.Name)
+                    continue;
+
+                method = @interface.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+                if (method != null)
+                    return method;
+            }
+
+            // Try implicit implementation
+            method = sourceType.GetMethod(name, BindingFlags.Public | BindingFlags.Instance, null, parameters, null);
+            if (method != null)
+                return method;
+
+            return null;
         }
     }
 }
