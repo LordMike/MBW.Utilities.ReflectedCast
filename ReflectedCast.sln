@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestApp", "TestApp\TestApp.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReflectedCast", "ReflectedCast\ReflectedCast.csproj", "{73C543CF-0056-42F5-902E-7DD5E58D46E6}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ReflectedCast.Tests", "ReflectedCast.Tests\ReflectedCast.Tests.csproj", "{5D38B458-DEF4-4447-BB27-5DA601CEB3EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{73C543CF-0056-42F5-902E-7DD5E58D46E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{73C543CF-0056-42F5-902E-7DD5E58D46E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{73C543CF-0056-42F5-902E-7DD5E58D46E6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5D38B458-DEF4-4447-BB27-5DA601CEB3EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D38B458-DEF4-4447-BB27-5DA601CEB3EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D38B458-DEF4-4447-BB27-5DA601CEB3EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D38B458-DEF4-4447-BB27-5DA601CEB3EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
