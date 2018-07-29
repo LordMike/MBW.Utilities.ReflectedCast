@@ -9,23 +9,14 @@ namespace ReflectedCast
 {
     internal static class ReflectedCastGenerator
     {
-        private static readonly ModuleBuilder ModuleBuilder;
-
-        static ReflectedCastGenerator()
-        {
-            // Create a dynamic assembly and module 
-            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ProxyAssembly"), AssemblyBuilderAccess.Run);
-            ModuleBuilder = assemblyBuilder.DefineDynamicModule("ProxyModule");
-        }
-
-        public static TypeMap CreateWrapperType(ReflectedCasterOptions options, Type sourceType, Type targetType)
+        public static TypeMap CreateWrapperType(ReflectedCasterOptions options, ModuleBuilder moduleBuilder, Type sourceType, Type targetType)
         {
             string newTypeName = "Wrapper_" + sourceType.FullName + "_" + targetType.FullName;
 
             TypeMap result = new TypeMap(sourceType, targetType);
 
             // Create a new type builder
-            TypeBuilder typeBuilder = ModuleBuilder.DefineType(newTypeName, TypeAttributes.Public | TypeAttributes.Class);
+            TypeBuilder typeBuilder = moduleBuilder.DefineType(newTypeName, TypeAttributes.Public | TypeAttributes.Class);
             typeBuilder.AddInterfaceImplementation(targetType);
 
             // Add constructor

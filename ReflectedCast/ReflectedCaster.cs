@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
+using System.Reflection.Emit;
 using JetBrains.Annotations;
 using ReflectedCast.Exceptions;
 using ReflectedCast.Internal;
@@ -13,12 +15,16 @@ namespace ReflectedCast
 
         private readonly Dictionary<TypeMapKey, TypeMap> _maps;
         private readonly ReflectedCasterOptions _options;
+        private readonly ModuleBuilder _moduleBuilder;
 
         public ReflectedCaster(ReflectedCasterOptions options = null)
         {
             _options = options == null ? new ReflectedCasterOptions() : options.Clone();
-
             _maps = new Dictionary<TypeMapKey, TypeMap>();
+
+            // Create a dynamic assembly and module 
+            AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("ProxyAssembly-" + Guid.NewGuid()), AssemblyBuilderAccess.Run);
+            _moduleBuilder = assemblyBuilder.DefineDynamicModule("ProxyModule");
         }
 
         private static void CheckOptions(TypeMap wrappedResult, CastUsageOptions usageOptions)
@@ -49,7 +55,7 @@ namespace ReflectedCast
             Type sourceType = instance.GetType();
 
             if (!_maps.TryGetValue(new TypeMapKey(sourceType, targetType), out TypeMap wrappedResult))
-                _maps[new TypeMapKey(sourceType, targetType)] = wrappedResult = ReflectedCastGenerator.CreateWrapperType(_options, sourceType, targetType);
+                _maps[new TypeMapKey(sourceType, targetType)] = wrappedResult = ReflectedCastGenerator.CreateWrapperType(_options, _moduleBuilder, sourceType, targetType);
 
             // Check options
             CheckOptions(wrappedResult, usageOptions);
