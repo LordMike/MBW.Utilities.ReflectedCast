@@ -32,7 +32,7 @@ namespace ReflectedCast
             FieldBuilder internalField = typeBuilder.DefineField("_internal", sourceType, FieldAttributes.Private | FieldAttributes.InitOnly);
             ConstructorBuilder ctor = typeBuilder.DefineConstructor(
                 MethodAttributes.SpecialName | MethodAttributes.RTSpecialName | MethodAttributes.HideBySig |
-                MethodAttributes.Public, CallingConventions.Standard, new[] { sourceType });
+                MethodAttributes.Public, CallingConventions.Standard | CallingConventions.HasThis, new[] { sourceType });
 
             {
                 // Create constructor for wrapper type
