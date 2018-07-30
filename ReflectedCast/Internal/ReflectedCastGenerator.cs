@@ -3,9 +3,8 @@ using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
 using ReflectedCast.Exceptions;
-using ReflectedCast.Internal;
 
-namespace ReflectedCast
+namespace ReflectedCast.Internal
 {
     internal static class ReflectedCastGenerator
     {
