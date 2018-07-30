@@ -50,7 +50,8 @@ In general, you'll have an interface and an object that you wish to cast to that
 | SupportExplicitImplementationsByInterfaceName | `true` | Supports the case of explicitly implemented interfaces. Unlike `SupportExplicitImplementations`, matching is only done on `interface.Name` of the interface you're Converting to |
 | SupportSpecificReturnTypes | `false` | Support the cases where an interface defines a more generic return type, than the one the instance returns. Example, interface: `object Method();`, class: `string Method();` |
 
-
-
-
 ## Options, `CastToInterface`
+
+|  Option | Default | Description |
+|:---|:---|:---|
+| AllowMissingFunctions | `false` | Allow cases where an `instance` is missing one or more functions defined in the `interface`. The functions will throw an exception when called |
