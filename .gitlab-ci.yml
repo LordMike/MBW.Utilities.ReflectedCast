@@ -4,6 +4,7 @@ stages:
 - build
 - test
 - pack
+- nuget
 
 build:
   stage: build
@@ -27,10 +28,19 @@ test:
 pack:
   stage: pack
   script:
-    - dotnet pack ReflectedCast -c Debug --include-source --no-build --no-restore --include-symbols -o ../Build
+    - dotnet pack ReflectedCast -c Release --no-restore --include-symbols -o ../Build
   artifacts:
     expire_in: 1 week
     paths:
     - Build/*.nupkg
   dependencies:
   - build
+
+nuget:
+  stage: nuget
+  script:
+    - dotnet nuget push
+  dependencies:
+  - pack
+  only:
+  - nuget
