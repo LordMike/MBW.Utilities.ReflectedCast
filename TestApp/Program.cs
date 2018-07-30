@@ -10,24 +10,20 @@ namespace TestApp
             TestClass orig = new TestClass();
             ITestInterface asInterface = ReflectedCaster.Default.CastToInterface<ITestInterface>(orig);
 
-            asInterface.Method();
-
-            Console.WriteLine(orig.ReturnCode);
+            Console.WriteLine(asInterface.Method());
         }
     }
 
     public interface ITestInterface
     {
-        void Method();
+        string Method();
     }
 
     public class TestClass
     {
-        public object ReturnCode { get; set; }
-
-        public void Method()
+        public string Method()
         {
-            ReturnCode = "Hello world";
+            return "Hello world";
         }
     }
 }
