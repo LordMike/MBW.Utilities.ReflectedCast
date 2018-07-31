@@ -38,7 +38,7 @@ pack:
 nuget:
   stage: nuget
   script:
-    - dotnet nuget push Build/*.nupkg -s https://api.nuget.org/v3/index.json
+    - dotnet nuget push Build/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_KEY
   dependencies:
   - pack
   only:
