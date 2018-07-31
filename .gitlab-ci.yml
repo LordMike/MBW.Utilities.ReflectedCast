@@ -27,7 +27,7 @@ pack:
   stage: pack
   script:
     - dotnet restore
-    - dotnet pack -c Release --no-restore --include-symbols -o Build
+    - dotnet pack -c Release --no-restore --include-symbols -o $CI_PROJECT_DIR/Build
   artifacts:
     paths:
     - Build/*.nupkg
