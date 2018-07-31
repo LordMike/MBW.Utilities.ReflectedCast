@@ -19,7 +19,7 @@ test:
   stage: test
   script:
     - dotnet restore
-    - (cd ReflectedCast.Tests; dotnet test -c Debug)
+    - (cd ReflectedCast.Tests; dotnet test -c Debug /p:CollectCoverage=true)
   dependencies:
   - build
 
