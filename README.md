@@ -41,6 +41,7 @@ In general, you'll have an interface and an object that you wish to cast to that
 
 * You can use `ReflectedCaster.Default` or create a new `ReflectedCaster` with certain options.
 * Once you have a `ReflectedCaster`, you can use `CastToInterface()` to do the casting. Here you can also specify more options for your cast
+* All involved interfaces, classes and methods / properties / events .., MUST be public. They will be invoked from a new assembly, and need to be acessible.
 
 ## Options, `ReflectedCaster`
 
