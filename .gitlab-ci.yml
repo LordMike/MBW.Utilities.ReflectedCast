@@ -4,6 +4,7 @@ stages:
 - build
 - test
 - pack
+- nuget
 
 build:
   stage: build
@@ -17,20 +18,28 @@ build:
 test:
   stage: test
   script:
+    - dotnet restore
     - (cd ReflectedCast.Tests; dotnet test -c Debug)
-  artifacts:
-    untracked: true
-    expire_in: 6 hours
   dependencies:
   - build
 
 pack:
   stage: pack
   script:
-    - dotnet pack ReflectedCast -c Debug --include-source --no-build --no-restore --include-symbols -o ../Build
+    - dotnet restore
+    - dotnet pack -c Release --no-restore --include-symbols -o $CI_PROJECT_DIR/Build
   artifacts:
-    expire_in: 1 week
     paths:
     - Build/*.nupkg
+    expire_in: 1 week
   dependencies:
   - build
+
+nuget:
+  stage: nuget
+  script:
+    - dotnet nuget push Build/*.nupkg
+  dependencies:
+  - pack
+  only:
+  - nuget
