@@ -39,6 +39,7 @@ nuget:
   stage: nuget
   script:
     - dotnet nuget push Build/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_KEY
+    - dotnet nuget push Build/*.symbols.nupkg -s https://nuget.smbsrc.net -k $NUGET_KEY
   dependencies:
   - pack
   only:
