@@ -19,9 +19,6 @@ test:
   stage: test
   script:
     - (cd ReflectedCast.Tests; dotnet test -c Debug)
-  artifacts:
-    untracked: true
-    expire_in: 6 hours
   dependencies:
   - build
 
@@ -30,9 +27,8 @@ pack:
   script:
     - dotnet pack -c Release --no-restore --include-symbols -o Build
   artifacts:
+    untracked: true
     expire_in: 1 week
-    paths:
-    - Build/*.nupkg
   dependencies:
   - build
 
