@@ -1,21 +1,45 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
+  <!-- Base -->
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <PublishRepositoryUrl>true</PublishRepositoryUrl>
-    <PackageId>ReflectedCast</PackageId>
+  </PropertyGroup>
+
+  <!-- Package -->
+  <PropertyGroup>
     <Authors>LordMike</Authors>
+    <PackageId>ReflectedCast</PackageId>
     <Company>MBWarez</Company>
     <Product>ReflectedCast</Product>
-    <RepositoryUrl>https://github.com/LordMike/ReflectedCast.git</RepositoryUrl>
+    <RepositoryUrl>https://github.com/LordMike/ReflectedCast</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseUrl>https://github.com/LordMike/ReflectedCast/blob/master/LICENSE.txt</PackageLicenseUrl>
     <PackageProjectUrl>https://github.com/LordMike/ReflectedCast</PackageProjectUrl>
   </PropertyGroup>
 
+  <!-- Dependencies -->
   <ItemGroup>
+    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" privateAssets="All" />
+  </ItemGroup>
+
+  <!-- Sourcelinking -->
+  <PropertyGroup>
+    <PublishRepositoryUrl>true</PublishRepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <SourceLinkGitHubHost Include="scm.mbwarez.dk" />
+
     <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" privateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
+
+  <Target Name="UseGithubSourcelinkRoot" AfterTargets="$(SourceControlManagerUrlTranslationTargets)">
+    <ItemGroup>
+      <SourceRoot Update="@(SourceRoot)">
+        <ScmRepositoryUrl>https://github.com/LordMike/ReflectedCast.git</ScmRepositoryUrl>
+      </SourceRoot>
+    </ItemGroup>
+  </Target>
 
 </Project>

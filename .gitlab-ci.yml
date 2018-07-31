@@ -28,7 +28,7 @@ test:
 pack:
   stage: pack
   script:
-    - dotnet pack ReflectedCast -c Release --no-restore --include-symbols -o ../Build
+    - dotnet pack -c Release --no-restore --include-symbols -o Build
   artifacts:
     expire_in: 1 week
     paths:
