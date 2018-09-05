@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Reflection;
-using ReflectedCast.Internal;
+using MBW.Utilities.ReflectedCast.Internal;
 
-namespace ReflectedCast.Exceptions
+namespace MBW.Utilities.ReflectedCast.Exceptions
 {
     public class ReflectedCastMissingMethodsException : Exception
     {

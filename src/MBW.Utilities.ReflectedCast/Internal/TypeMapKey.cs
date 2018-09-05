@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReflectedCast.Internal
+namespace MBW.Utilities.ReflectedCast.Internal
 {
     internal struct TypeMapKey : IEquatable<TypeMapKey>
     {

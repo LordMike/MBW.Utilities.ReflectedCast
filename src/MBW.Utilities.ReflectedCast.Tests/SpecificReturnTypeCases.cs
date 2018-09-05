@@ -1,7 +1,7 @@
-﻿using ReflectedCast.Exceptions;
+﻿using MBW.Utilities.ReflectedCast.Exceptions;
 using Xunit;
 
-namespace ReflectedCast.Tests
+namespace MBW.Utilities.ReflectedCast.Tests
 {
     public class SpecificReturnTypeCases
     {

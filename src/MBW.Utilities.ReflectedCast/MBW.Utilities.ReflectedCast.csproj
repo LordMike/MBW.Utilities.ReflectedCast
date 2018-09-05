@@ -1,5 +1,9 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
-
+  <!-- Remove this at a later point, when Nuget has fixed the whole pdb thing -->
+  <ItemGroup>
+    <PackageReference Include="SourceLink.Copy.PdbFiles" Version="2.8.3" PrivateAssets="All" />
+  </ItemGroup>
+  
   <!-- Base -->
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
@@ -8,13 +12,15 @@
   <!-- Package -->
   <PropertyGroup>
     <Authors>LordMike</Authors>
-    <PackageId>ReflectedCast</PackageId>
+    <PackageId>MBW.Utilities.ReflectedCast</PackageId>
     <Company>MBWarez</Company>
-    <Product>ReflectedCast</Product>
-    <RepositoryUrl>https://github.com/LordMike/ReflectedCast</RepositoryUrl>
+    <Product>MBW.Utilities.ReflectedCast</Product>
+    <RepositoryUrl>https://github.com/LordMike/MBW.Utilities.ReflectedCast</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
-    <PackageLicenseUrl>https://github.com/LordMike/ReflectedCast/blob/master/LICENSE.txt</PackageLicenseUrl>
-    <PackageProjectUrl>https://github.com/LordMike/ReflectedCast</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/LordMike/MBW.Utilities.ReflectedCast/blob/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/LordMike/MBW.Utilities.ReflectedCast</PackageProjectUrl>
+    <DebugType>portable</DebugType>
+    <DebugSymbols>true</DebugSymbols>
   </PropertyGroup>
 
   <!-- Dependencies -->
@@ -29,15 +35,13 @@
 
   <ItemGroup>
     <SourceLinkGitHubHost Include="scm.mbwarez.dk" />
-
-    <PackageReference Include="JetBrains.Annotations" Version="2018.2.1" privateAssets="All" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="1.0.0-beta-63127-02" PrivateAssets="All" />
   </ItemGroup>
 
   <Target Name="UseGithubSourcelinkRoot" AfterTargets="$(SourceControlManagerUrlTranslationTargets)">
     <ItemGroup>
       <SourceRoot Update="@(SourceRoot)">
-        <ScmRepositoryUrl>https://github.com/LordMike/ReflectedCast.git</ScmRepositoryUrl>
+        <ScmRepositoryUrl>https://github.com/LordMike/MBW.Utilities.ReflectedCast.git</ScmRepositoryUrl>
       </SourceRoot>
     </ItemGroup>
   </Target>

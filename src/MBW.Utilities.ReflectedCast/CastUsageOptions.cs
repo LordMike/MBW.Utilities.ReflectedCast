@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReflectedCast
+namespace MBW.Utilities.ReflectedCast
 {
     [Flags]
     public enum CastUsageOptions
