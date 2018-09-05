@@ -1,7 +1,7 @@
 ﻿using System;
 using Xunit;
 
-namespace ReflectedCast.Tests
+namespace MBW.Utilities.ReflectedCast.Tests
 {
     public class Basics
     {

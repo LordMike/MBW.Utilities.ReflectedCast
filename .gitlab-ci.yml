@@ -19,7 +19,7 @@ test:
   stage: test
   script:
     - dotnet restore
-    - (cd ReflectedCast.Tests; dotnet test -c Debug /p:CollectCoverage=true)
+    - (cd src/MBW.Utilities.ReflectedCast.Tests; dotnet test -c Debug /p:CollectCoverage=true)
   dependencies:
   - build
 
@@ -39,7 +39,6 @@ nuget:
   stage: nuget
   script:
     - dotnet nuget push Build/*.nupkg -s https://api.nuget.org/v3/index.json -k $NUGET_KEY
-    - dotnet nuget push Build/*.symbols.nupkg -s https://nuget.smbsrc.net -k $NUGET_KEY
   dependencies:
   - pack
   only:

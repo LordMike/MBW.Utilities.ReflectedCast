@@ -1,6 +1,6 @@
 ﻿using JetBrains.Annotations;
 
-namespace ReflectedCast
+namespace MBW.Utilities.ReflectedCast
 {
     [PublicAPI]
     public class ReflectedCasterOptions

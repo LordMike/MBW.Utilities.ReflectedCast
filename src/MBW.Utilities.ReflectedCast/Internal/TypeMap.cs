@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 
-namespace ReflectedCast.Internal
+namespace MBW.Utilities.ReflectedCast.Internal
 {
     internal class TypeMap
     {

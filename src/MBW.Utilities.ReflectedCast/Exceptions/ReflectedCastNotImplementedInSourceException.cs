@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ReflectedCast.Exceptions
+namespace MBW.Utilities.ReflectedCast.Exceptions
 {
     public class ReflectedCastNotImplementedInSourceException : Exception
     {

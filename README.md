@@ -7,6 +7,12 @@ A library to cast one object to an interface, from which it _doesn't_ inherit.
 * You're hacking around a lot, and need to work with IL emitting code
 * You're loading in assemblies with your own `AssemblyLoadContext`, you've messed up the load dependencies
 
+### Packages
+
+| Package | Nuget |
+| ------------- |:-------------:|
+| MBW.Utilities.ReflectedCast | [![NuGet](https://img.shields.io/nuget/v/MBW.Utilities.ReflectedCast.svg)](https://www.nuget.org/packages/MBW.Utilities.ReflectedCast) |
+
 ## Usage
 
 In general, you'll have an interface and an object that you wish to cast to that interface. The ReflectedCast can be used like this. Notice how the class `TestClass` does not inherit from `ITestInterface`.
@@ -41,7 +47,7 @@ In general, you'll have an interface and an object that you wish to cast to that
 
 * You can use `ReflectedCaster.Default` or create a new `ReflectedCaster` with certain options.
 * Once you have a `ReflectedCaster`, you can use `CastToInterface()` to do the casting. Here you can also specify more options for your cast
-* All involved interfaces, classes and methods / properties / events .., MUST be public. They will be invoked from a new assembly, and need to be acessible.
+* All involved interfaces, classes and methods / properties / events .., **MUST be public**. They will be invoked from a new assembly, and need to be acessible.
 
 ## Options, `ReflectedCaster`
 

@@ -1,5 +1,5 @@
 ﻿using System;
-using ReflectedCast;
+using MBW.Utilities.ReflectedCast;
 
 namespace TestApp
 {

@@ -13,7 +13,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\ReflectedCast\ReflectedCast.csproj" />
+    <ProjectReference Include="..\MBW.Utilities.ReflectedCast\MBW.Utilities.ReflectedCast.csproj" />
   </ItemGroup>
 
 </Project>

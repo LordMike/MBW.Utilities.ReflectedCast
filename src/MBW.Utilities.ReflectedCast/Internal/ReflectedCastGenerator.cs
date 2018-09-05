@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Reflection;
 using System.Reflection.Emit;
-using ReflectedCast.Exceptions;
+using MBW.Utilities.ReflectedCast.Exceptions;
 
-namespace ReflectedCast.Internal
+namespace MBW.Utilities.ReflectedCast.Internal
 {
     internal static class ReflectedCastGenerator
     {
