@@ -14,8 +14,15 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{51438EEB-2BBB-49FB-9820-0B72D2B5A7EE}"
 	ProjectSection(SolutionItems) = preProject
 		.gitlab-ci.yml = .gitlab-ci.yml
-		Directory.Build.props = Directory.Build.props
 		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "imports", "imports", "{54EEDE52-01A1-4A0A-BF4C-DAB8E0A24335}"
+	ProjectSection(SolutionItems) = preProject
+		imports\_Properties.targets = imports\_Properties.targets
+		imports\_SourceLink.targets = imports\_SourceLink.targets
+		imports\Library.targets = imports\Library.targets
+		imports\Test.targets = imports\Test.targets
 	EndProjectSection
 EndProject
 Global
@@ -72,6 +79,7 @@ Global
 		{F0F14D59-0767-420A-A81A-A123B55071EE} = {042D85CE-8A29-41ED-ACBE-0305F61AABB4}
 		{86C027D1-0F37-4830-A761-F2770E9A7629} = {042D85CE-8A29-41ED-ACBE-0305F61AABB4}
 		{C3F42479-0B24-45D8-AE23-C023C40337E8} = {042D85CE-8A29-41ED-ACBE-0305F61AABB4}
+		{54EEDE52-01A1-4A0A-BF4C-DAB8E0A24335} = {51438EEB-2BBB-49FB-9820-0B72D2B5A7EE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {316D0561-E078-49EF-81DD-03904995375A}
