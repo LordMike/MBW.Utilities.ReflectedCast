@@ -1,4 +1,4 @@
-## ReflectedCast
+## ReflectedCast [![Generic Build](https://github.com/LordMike/MBW.Utilities.ReflectedCast/actions/workflows/dotnet.yml/badge.svg)](https://github.com/LordMike/MBW.Utilities.ReflectedCast/actions/workflows/dotnet.yml) [![NuGet](https://img.shields.io/nuget/v/MBW.Utilities.ReflectedCast.svg)](https://www.nuget.org/packages/MBW.Utilities.ReflectedCast) [![GHPackages](https://img.shields.io/badge/package-alpha-green)](https://github.com/LordMike/MBW.Utilities.ReflectedCast/packages/692171)
 
 A library to cast one object to an interface, from which it _doesn't_ inherit. 
 
@@ -6,12 +6,6 @@ A library to cast one object to an interface, from which it _doesn't_ inherit.
 
 * You're hacking around a lot, and need to work with IL emitting code
 * You're loading in assemblies with your own `AssemblyLoadContext`, you've messed up the load dependencies
-
-### Packages
-
-| Package | Nuget |
-| ------------- |:-------------:|
-| MBW.Utilities.ReflectedCast | [![NuGet](https://img.shields.io/nuget/v/MBW.Utilities.ReflectedCast.svg)](https://www.nuget.org/packages/MBW.Utilities.ReflectedCast) |
 
 ## Usage
 
