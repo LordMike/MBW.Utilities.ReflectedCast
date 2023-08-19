@@ -66,7 +66,7 @@ namespace MBW.Utilities.ReflectedCast.Internal
                     methodIl.Emit(OpCodes.Ldtoken, sourceType);
                     
                     // sourceType is actually a RuntimeTypeHandle, so we need to convert it to a Type at runtime.
-                    MethodInfo getTypeFromHandle = typeof(Type).GetMethod("GetTypeFromHandle");
+                    MethodInfo getTypeFromHandle = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle));
                     methodIl.Emit(OpCodes.Call, getTypeFromHandle);
                     
                     methodIl.Emit(OpCodes.Ldstr, method.ToString());
