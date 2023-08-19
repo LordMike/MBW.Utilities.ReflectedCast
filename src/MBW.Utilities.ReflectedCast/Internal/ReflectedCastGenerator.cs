@@ -62,7 +62,13 @@ namespace MBW.Utilities.ReflectedCast.Internal
                     result.MissingMethods.Add(method);
 
                     // Generate method that throws exception
+                    // Call new ReflectedCastNotImplementedInSourceException(type, string)
                     methodIl.Emit(OpCodes.Ldtoken, sourceType);
+                    
+                    // sourceType is actually a RuntimeTypeHandle, so we need to convert it to a Type at runtime.
+                    MethodInfo getTypeFromHandle = typeof(Type).GetMethod("GetTypeFromHandle");
+                    methodIl.Emit(OpCodes.Call, getTypeFromHandle);
+                    
                     methodIl.Emit(OpCodes.Ldstr, method.ToString());
                     methodIl.Emit(OpCodes.Newobj, typeof(ReflectedCastNotImplementedInSourceException).GetConstructor(new[] { typeof(Type), typeof(string) }));
                     methodIl.Emit(OpCodes.Throw);
